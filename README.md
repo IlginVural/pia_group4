@@ -39,33 +39,29 @@ Okay, here's a list of use case names for an ATS system, categorized by the two 
     *   Description: Allows a recruiter to define and publish a new job opening, including description, requirements, salary range (optional), etc.
 4.  **UC-R04: Manage Job Postings**
     *   Description: Allows a recruiter to edit, archive, unarchive, or close existing job postings.
-5.  **UC-R05: Post Job to External Job Boards** (Optional, if integrated)
-    *   Description: Allows a recruiter to publish job postings to third-party job boards.
-6.  **UC-R06: Search/Filter Candidate Database**
+5.  **UC-R05: Search/Filter Candidate Database**
     *   Description: Allows a recruiter to search and filter the entire pool of applicants (past and present) based on skills, experience, keywords, location, etc.
-7.  **UC-R07: Review Applications for a Job**
+6.  **UC-R06: Review Applications for a Job**
     *   Description: Allows a recruiter to view and assess applicants who have applied for a specific job posting.
-8.  **UC-R08: View Applicant Profile & Documents**
+7.  **UC-R07: View Applicant Profile & Documents**
     *   Description: Allows a recruiter to access the detailed profile, resume, and other documents of an applicant.
-9.  **UC-R09: Manage Candidate Pipeline/Status**
+8.  **UC-R08: Manage Candidate Pipeline/Status**
     *   Description: Allows a recruiter to move candidates through different stages of the hiring process (e.g., New, Screened, Interview, Offer, Hired, Rejected).
-10. **UC-R10: Shortlist/Reject Candidates**
+9. **UC-R9: Shortlist/Reject Candidates**
     *   Description: Allows a recruiter to mark candidates as shortlisted for further consideration or reject them.
-11. **UC-R11: Schedule Interview**
+10. **UC-R10: Schedule Interview**
     *   Description: Allows a recruiter to schedule interviews with candidates, assign interviewers, and send invitations.
-12. **UC-R12: Manage Interview Feedback**
+11. **UC-R11: Manage Interview Feedback**
     *   Description: Allows a recruiter to record and view feedback from interviewers.
-13. **UC-R13: Communicate with Candidate**
+12. **UC-R12: Communicate with Candidate**
     *   Description: Allows a recruiter to send emails (templated or custom) or messages to candidates (e.g., interview invitations, status updates, rejection letters).
-14. **UC-R14: Extend Job Offer**
+13. **UC-R13: Extend Job Offer**
     *   Description: Allows a recruiter to create and send a job offer to a selected candidate.
-15. **UC-R15: Manage Offer Status**
+14. **UC-R14: Manage Offer Status**
     *   Description: Allows a recruiter to track the status of an offer (Sent, Accepted, Declined, Negotiating).
-16. **UC-R16: Generate Recruitment Reports**
-    *   Description: Allows a recruiter to generate reports on hiring activity, time-to-fill, source effectiveness, candidate diversity, etc.
-17. **UC-R17: Manage Recruiter Account** (If applicable, for their own settings)
+15. **UC-R15: Manage Recruiter Account** (If applicable, for their own settings)
     *   Description: Allows a recruiter to manage their own notification preferences or basic account settings.
-18. **UC-R18: Add Notes/Tags to Candidate Profile**
+16. **UC-R16: Add Notes/Tags to Candidate Profile**
     *   Description: Allows recruiters to add internal notes, comments, or tags to candidate profiles for better organization and collaboration.
 
 These use cases cover the fundamental interactions for both roles. Depending on the complexity and specific features of your ATS, you might break these down further or add more specialized ones.
