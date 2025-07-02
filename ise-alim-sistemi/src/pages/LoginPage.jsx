@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 
 function LoginPage() {
+  const navigate = useNavigate(); 
+
   return (
     <>
       <nav style={styles.navbar}>
@@ -17,7 +19,12 @@ function LoginPage() {
           <div style={{ textAlign: 'right', marginBottom: '12px' }}>
             <Link to="/forgot-password" style={styles.forgotLink}>Şifremi Unuttum?</Link>
           </div>
-          <button style={styles.button}>Giriş</button>
+          <button
+            style={styles.button}
+            onClick={() => navigate('/AdminDashboard')} 
+          >
+            Giriş
+          </button>
           <p style={styles.text}>
             Hesabınız yok mu? <Link to="/register" style={styles.link}>Kayıt Ol</Link>
           </p>
