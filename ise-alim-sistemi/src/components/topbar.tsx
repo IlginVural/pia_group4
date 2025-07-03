@@ -17,8 +17,8 @@ const styles = {
     alignItems: 'center',
   },
   logoImg: {
-    width: '100px',   // or '40px'
-    height: '100px',  // or '40px'
+    width: '100px',   
+    height: '100px',  
     display: 'block',
     marginRight: '20px',
   },

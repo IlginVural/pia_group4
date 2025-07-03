@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiHome, FiBriefcase, FiUsers, FiBarChart2, FiClipboard } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const styles = {
     sidebar: {
@@ -22,6 +23,7 @@ const styles = {
       color: '#93c5fd',
       marginLeft: 0,
       paddingLeft: '10px',
+      textDecoration: 'none',
     },
     activeMenuItem: {
       borderLeft: '4px solid white',
@@ -39,14 +41,16 @@ const styles = {
 
 const Sidebar = () => (
     <div style={styles.sidebar}>
-      <div style={{...styles.menuItem, ...styles.activeMenuItem}}>
+      <Link to="/AdminDashboard" style={styles.menuItem}>
         <FiHome style={styles.menuIcon}/>
         <span style={styles.menuLabel}>Home Page</span>
-      </div>
-      <div style={styles.menuItem}>
+      </Link>
+
+      <Link to="/jobs" style={styles.menuItem}>
         <FiBriefcase style={styles.menuIcon}/>
         <span style={styles.menuLabel}>Jobs</span>
-      </div>
+      </Link>
+
       <div style={styles.menuItem}>
         <FiUsers style={styles.menuIcon}/>
         <span style={styles.menuLabel}>Candidates</span>
