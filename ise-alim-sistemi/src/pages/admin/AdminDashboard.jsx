@@ -1,108 +1,233 @@
-import React from "react";
-import { CalendarDays, UserCheck, Users, ClipboardList } from "lucide-react";
+import React from 'react';
+// Make sure you have react-icons installed: npm install react-icons
+import { 
+  FiUsers, FiBriefcase, FiCheckSquare, FiClipboard, FiSearch, 
+  FiMail, FiCalendar, FiBarChart2, FiGift, FiHelpCircle, FiHome 
+} from 'react-icons/fi';
+import Sidebar from '../../components/sidebar.tsx';
+import TopBar from '../../components/topbar.tsx';
 
-const AdminDashboardPage = () => {
+// Main Component
+function AdminDashboard() {
+  const jobPostings = [
+    { title: 'Senior Data Analyst', remaining: 3, applications: 123, interviewed: 40, rejected: 33, evaluation: 7, offers: 2 },
+    { title: 'Junior Data Analyst', remaining: 7, applications: 567, interviewed: 22, rejected: 20, evaluation: 2, offers: 4 },
+    { title: 'Product Designer', remaining: 2, applications: 201, interviewed: 32, rejected: 18, evaluation: 14, offers: 0 },
+    { title: 'Java Developer', remaining: 5, applications: 231, interviewed: 23, rejected: 10, evaluation: 13, offers: 3 },
+    { title: 'Product Manager', remaining: 3, applications: 67, interviewed: 41, rejected: 22, evaluation: 19, offers: 1 },
+  ];
+
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-60 bg-[#0a4b78] text-white p-5 space-y-6">
-        <div className="text-2xl font-bold">PiA</div>
-        <nav className="space-y-4">
-          <a href="#" className="block font-semibold">Ana Sayfa</a>
-          <a href="#" className="block">İlanlar</a>
-          <a href="#" className="block">Adaylar</a>
-          <a href="#" className="block">Raporlar</a>
-          <a href="#" className="block">Mülakatlar</a>
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-6 overflow-auto">
-        <header className="flex justify-between items-center mb-6">
-          <h1 className="text-xl font-semibold">Genel Bakış</h1>
-          <button className="bg-[#0a4b78] text-white px-4 py-2 rounded-md">+ İlan Ekle</button>
-        </header>
-
-        {/* Status Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow p-4 text-center">
-            <div className="text-3xl font-bold text-[#6a11cb]">33</div>
-            <p className="mt-2 text-sm text-gray-600">Bekleyen Mülakatlar</p>
+    <div style={styles.appContainer}>
+      <TopBar />
+      <div style={styles.contentWrapper}>
+        <Sidebar />
+        <div style={styles.mainContent}>
+          <Header />
+          <div style={styles.cardsContainer}>
+            <DashboardCard number="33" imgSrc="/interview.png" imgSize={120} label="Pending Interviews" />
+            <DashboardCard number="2" imgSrc="/jobs.png" imgSize={120} label="Pending Job Drafts" />
+            <DashboardCard number="44" imgSrc="/application.png" imgSize={120} label="Pending Applications"/>
+            <DashboardCard number="13" imgSrc="/offer.png" imgSize={120} label="Pending Offers" />
           </div>
-          <div className="bg-white rounded-xl shadow p-4 text-center">
-            <div className="text-3xl font-bold text-[#6a11cb]">2</div>
-            <p className="mt-2 text-sm text-gray-600">Bekleyen Onaylar</p>
-          </div>
-          <div className="bg-white rounded-xl shadow p-4 text-center">
-            <div className="text-3xl font-bold text-[#6a11cb]">44</div>
-            <p className="mt-2 text-sm text-gray-600">Bekleyen Değerlendirme</p>
-          </div>
-          <div className="bg-white rounded-xl shadow p-4 text-center">
-            <div className="text-3xl font-bold text-[#6a11cb]">13</div>
-            <p className="mt-2 text-sm text-gray-600">Bekleyen Kabuller</p>
-          </div>
+          <JobTable data={jobPostings} />
         </div>
-
-        {/* Table and Meetings */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Table */}
-          <div className="lg:col-span-2 bg-white rounded-xl shadow p-4 overflow-auto">
-            <h2 className="text-md font-semibold mb-4">Önemli İlanlar</h2>
-            <table className="min-w-full text-sm">
-              <thead>
-                <tr className="text-left text-gray-600">
-                  <th className="pb-2">İlan</th>
-                  <th className="pb-2">Pozisyon</th>
-                  <th className="pb-2">Başvuru</th>
-                  <th className="pb-2">Mülakat</th>
-                  <th className="pb-2">Red</th>
-                  <th className="pb-2">Değerlendirme</th>
-                  <th className="pb-2">Teklif</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { title: "Senior Data Analyst", pos: 3, apply: 123, int: 40, reject: 33, eval: 7, offer: 2 },
-                  { title: "Junior Data Analyst", pos: 7, apply: 567, int: 22, reject: 6, eval: 2, offer: 4 },
-                  { title: "Product Designer", pos: 2, apply: 201, int: 32, reject: 18, eval: 14, offer: 0 },
-                  { title: "Java Developer", pos: 4, apply: 233, int: 22, reject: 13, eval: 13, offer: 3 },
-                  { title: "Product Manager", pos: 3, apply: 141, int: 21, reject: 19, eval: 19, offer: 1 },
-                ].map((row, i) => (
-                  <tr key={i} className="border-t border-gray-200">
-                    <td className="py-2 font-medium">{row.title}</td>
-                    <td>{row.pos}</td>
-                    <td>{row.apply}</td>
-                    <td>{row.int}</td>
-                    <td>{row.reject}</td>
-                    <td>{row.eval}</td>
-                    <td>{row.offer}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Meetings */}
-          <div className="bg-white rounded-xl shadow p-4">
-            <h2 className="text-md font-semibold mb-4">Yakındaki Toplantılar</h2>
-            <ul className="text-sm text-gray-700 space-y-2">
-              {[
-                "09:00 - UX Interview w/ Selin Kaya",
-                "10:30 - Tech Interview w/ Ahmet Demir",
-                "13:00 - HR Meeting w/ Elif Yılmaz",
-                "15:00 - Debrief w/ Hiring Team",
-                "16:30 - Product Demo"
-              ].map((meeting, idx) => (
-                <li key={idx} className="bg-blue-50 p-2 rounded border border-blue-200">
-                  {meeting}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   );
+}
+
+// Sub-components
+const Header = () => (
+  <header style={styles.header}>
+    <h1 style={styles.headerTitle}>Home Page</h1>
+  </header>
+);
+
+const DashboardCard = ({ number, icon, imgSrc, imgSize, label }) => (
+  <div style={{ ...styles.card, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    {imgSrc ? (
+      <img src={imgSrc} alt="" style={{ width: imgSize || 48, height: imgSize || 48, marginBottom: 12 }} />
+    ) : (
+      icon
+    )}
+    <span style={styles.cardNumber}>{number}</span>
+    {label && <span style={{ marginTop: 8, fontSize: 16, color: '#718096', textAlign: 'center' }}>{label}</span>}
+  </div>
+);
+
+const JobTable = ({ data }) => (
+  <div style={styles.tableCard}>
+    <h2 style={styles.tableTitle}><FiBriefcase style={{ marginRight: 10, verticalAlign: 'middle' }} />Jobs</h2>
+    <table style={styles.table}>
+      <thead>
+        <tr>
+          <th style={styles.th}>Job</th>
+          <th style={styles.thCenter}>Remaining Positions</th>
+          <th style={styles.thCenter}>Applications</th>
+          <th style={styles.thCenter}>Interviewed</th>
+          <th style={styles.thCenter}>Rejected</th>
+          <th style={styles.thCenter}>Evaluation</th>
+          <th style={styles.thCenter}>Offers</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, index) => (
+          <tr key={index}>
+            <td style={styles.td}>{row.title}</td>
+            <td style={styles.tdCenter}>{row.remaining}</td>
+            <td style={styles.tdCenter}>{row.applications}</td>
+            <td style={styles.tdCenter}>{row.interviewed}</td>
+            <td style={styles.tdCenter}>{row.rejected}</td>
+            <td style={styles.tdCenter}>{row.evaluation}</td>
+            <td style={styles.tdCenter}>{row.offers}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+// Styles
+const styles = {
+  appContainer: {
+    backgroundColor: '#E1EEFF',
+    minHeight: '100vh',
+    fontFamily: 'Arial, sans-serif',
+  },
+  contentWrapper: {
+    display: 'flex',
+  },
+  topNav: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    color: 'white',
+    height: '80px',
+  },
+  topNavLeft: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  topNavRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '25px',
+  },
+
+  searchInput: {
+    padding: '8px',
+    border: '1px solid #e2e8f0',
+    borderRadius: '4px',
+    marginLeft: '5px',
+  },
+  
+  mainContent: {
+    flex: 1,
+    padding: '20px 40px 20px 40px',
+    marginLeft: '0px',
+  },
+  header: {
+    marginBottom: '30px',
+  },
+  headerTitle: {
+    margin: 0,
+    fontSize: '28px',
+    fontWeight: 'bold',
+  },
+  headerSubtitle: {
+    margin: 0,
+    fontSize: '16px',
+    color: '#718096',
+  },
+  cardsContainer: {
+    display: 'flex',
+    gap: '20px',
+    marginBottom: '30px',
+  },
+  card: {
+    backgroundColor: 'white',
+    borderRadius: '12px',
+    padding: '20px',
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '15px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+  },
+  cardNumber: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  tableCard: {
+    backgroundColor: 'white',
+    borderRadius: '12px',
+    padding: '20px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+  },
+  tableTitle: {
+    margin: '0 0 20px 0',
+    fontSize: '20px',
+    fontWeight: 'bold',
+  },
+  table: {
+    width: '100%',
+    borderCollapse: 'collapse',
+  },
+  th: {
+    textAlign: 'left',
+    padding: '12px',
+    color: '#a0aec0',
+    borderBottom: '1px solid #e2e8f0',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    minWidth: '140px',
+  },
+  thCenter: {
+    textAlign: 'center',
+    padding: '12px',
+    color: '#a0aec0',
+    borderBottom: '1px solid #e2e8f0',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    minWidth: '160px',
+  },
+  td: {
+    padding: '12px',
+    borderBottom: '1px solid #e2e8f0',
+    fontSize: '14px',
+    color: '#2d3748',
+  },
+  tdCenter: {
+    textAlign: 'center',
+    padding: '12px',
+    borderBottom: '1px solid #e2e8f0',
+    fontSize: '14px',
+    color: '#2d3748',
+  },
+  headerSection: {
+    marginBottom: '30px',
+  },
+  homePageContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  dashboardSection: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '30px',
+  },
+  jobTableSection: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
 };
 
-export default AdminDashboardPage;
+export default AdminDashboard;
