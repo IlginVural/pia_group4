@@ -7,8 +7,11 @@ import {
 
 import Sidebar from '../../components/sidebar.tsx';
 import TopBar from '../../components/topbar.tsx';
+import { createJob, getJobs } from '../../services/JobService/JobService.js';
+import JobCard from '../../components/JobCard.jsx';
+import NewJobModal from '../../components/NewJobModal.jsx';
 
-const styles = {
+export const styles = {
   appContainer: {
     backgroundColor: '#E1EEFF',
     minHeight: '100vh',
@@ -210,32 +213,34 @@ function Jobs() {
   // state initializations
   const [jobs, setJobs] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({
-    title: '',
-    description: '',
-    location: '',
-    employmentType: '',
-    experienceLevel: '',
-  });
+
+  
+  const fetchJobs = async () => {
+    const response = await getJobs();
+    setJobs(response.data);
+    console.log(response.data);
+  };
 
   // API call
   useEffect(() => {
-    // ...
+    // ..
+    
+
+    fetchJobs();
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  const handleCreateJob = (e) => {
-    e.preventDefault();
-    // Here you would send the form data to your API or update state
+  const handleCreateJob = async (title,description,location,employmentType,experienceLevel) => {
+  
+    //console.log(title,description,location,employmentType,experienceLevel);
+    const jobResponse = await createJob({title,description,location,employmentType,experienceLevel});
+    console.log(jobResponse);
     setShowModal(false);
-    setForm({ title: '', description: '', location: '', employmentType: '', experienceLevel: '' });
+    fetchJobs();
+
   };
 
   return (
@@ -246,47 +251,7 @@ function Jobs() {
         <div style={styles.mainContent}>
           <button style={styles.createJobBtn} onClick={handleOpenModal}>Create a new job</button>
           {showModal && (
-            <div style={styles.modalOverlay}>
-              <form style={styles.modal} onSubmit={handleCreateJob}>
-                <div style={styles.modalTitle}>Create a New Job</div>
-                <div>
-                  <div style={styles.modalLabel}>Title</div>
-                  <input style={styles.modalInput} name="title" value={form.title} onChange={handleInputChange} required />
-                </div>
-                <div>
-                  <div style={styles.modalLabel}>Description</div>
-                  <textarea style={styles.modalInput} name="description" value={form.description} onChange={handleInputChange} rows={3} required />
-                </div>
-                <div>
-                  <div style={styles.modalLabel}>Location</div>
-                  <input style={styles.modalInput} name="location" value={form.location} onChange={handleInputChange} required />
-                </div>
-                <div>
-                  <div style={styles.modalLabel}>Employment Type</div>
-                  <select style={styles.modalSelect} name="employmentType" value={form.employmentType} onChange={handleInputChange} required>
-                    <option value="">Select type</option>
-                    <option value="Full-time">Full-time</option>
-                    <option value="Part-time">Part-time</option>
-                    <option value="Contract">Contract</option>
-                    <option value="Internship">Internship</option>
-                  </select>
-                </div>
-                <div>
-                  <div style={styles.modalLabel}>Experience Level</div>
-                  <select style={styles.modalSelect} name="experienceLevel" value={form.experienceLevel} onChange={handleInputChange} required>
-                    <option value="">Select level</option>
-                    <option value="Entry">Entry</option>
-                    <option value="Mid">Mid</option>
-                    <option value="Senior">Senior</option>
-                    <option value="Lead">Lead</option>
-                  </select>
-                </div>
-                <div style={styles.modalActions}>
-                  <button type="button" style={{ ...styles.modalButton, ...styles.modalCancel }} onClick={handleCloseModal}>Cancel</button>
-                  <button type="submit" style={{ ...styles.modalButton, ...styles.modalCreate }}>Create</button>
-                </div>
-              </form>
-            </div>
+            <NewJobModal  handleCloseModal={handleCloseModal} handleCreateJob={handleCreateJob} />
           )}
           <div style={styles.postJobCard}>
             <div>
@@ -302,40 +267,10 @@ function Jobs() {
             </div>
           </div>
           <div style={styles.sampleJobsTitle}>SAMPLE JOBS</div>
-          <div style={styles.jobCard}>
-            <div style={styles.jobTitle}>Account Executive</div>
-            <div style={styles.jobMeta}>On-site · London, United Kingdom</div>
-            <div style={styles.jobStats}>
-              <div style={styles.stat}><div style={styles.statNum}>6</div><div style={styles.statLabel}>Remaining Positions</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>18</div><div style={styles.statLabel}>Applied</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>10</div><div style={styles.statLabel}>Phone Screen</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>4</div><div style={styles.statLabel}>Assessment</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>1</div><div style={styles.statLabel}>Interview</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>1</div><div style={styles.statLabel}>Offer</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>1</div><div style={styles.statLabel}>Hired</div></div>
-            </div>
-            <div style={styles.jobActions}>
-              <button style={styles.jobActionBtn}>Find Candidates</button>
-              <button style={styles.jobActionBtn}>Used Internally</button>
-            </div>
-          </div>
-          <div style={styles.jobCard}>
-            <div style={styles.jobTitle}>Director of Finance</div>
-            <div style={styles.jobMeta}>On-site · New York, United States</div>
-            <div style={styles.jobStats}>
-              <div style={styles.stat}><div style={styles.statNum}>9</div><div style={styles.statLabel}>Remaining Positions</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>23</div><div style={styles.statLabel}>Applied</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>18</div><div style={styles.statLabel}>Phone Screen</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>10</div><div style={styles.statLabel}>Assessment</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>5</div><div style={styles.statLabel}>Interview</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>1</div><div style={styles.statLabel}>Offer</div></div>
-              <div style={styles.stat}><div style={styles.statNum}>1</div><div style={styles.statLabel}>Hired</div></div>
-            </div>
-            <div style={styles.jobActions}>
-              <button style={styles.jobActionBtn}>Find Candidates</button>
-              <button style={styles.jobActionBtn}>Used Internally</button>
-            </div>
-          </div>
+          {jobs.map((job) => (
+            <JobCard key={job.id} job={job} />
+          ))}
+         
         </div>
       </div>
     </div>
