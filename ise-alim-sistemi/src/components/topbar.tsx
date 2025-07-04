@@ -54,7 +54,7 @@ const TopBar = () => (
     </div>
     <div style={styles.topNavRight}>
       <div style={styles.userInfoWrapper}>
-        <span style={styles.userName}>Ece Kale</span>
+        <span style={styles.userName}>Ece Yurt</span>
         <span style={styles.userRole}>Admin</span>
         <div style={styles.userAvatarImg}></div>
       </div>
